@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4x4 Button Matrix with Flipping Effect</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('bg.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        h1 {
+            font-size: 5rem;
+            color: #70e000;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            margin-bottom: 10px;
+
+        }
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            width: 600px;
+            margin: 50px auto;
+           
+        }
+        .flip-card {
+            perspective: 1000px; 
+            /* width: 100px;Makes 3D effect more pronounced */
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 140px;
+            height: 100px;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+        .flipped {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden; /* Hides the backside when flipped */
+            border-radius: 5px;
+            border: 2px solid black;
+        }
+        .flip-card-front {
+            background-color: #caac8f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .flip-card-back {
+            background-color: #61a5c2;
+            transform: rotateY(180deg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-size: cover;
+            background-position: center;
+        }
+        #container {
+            align-content: center;
+            align-items: center;
+            border: 2px solid black;
+            border-radius: 25px;
+            margin: auto;
+            width: 700px;
+            background-color: rgb(161, 204, 165);
+           
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+   <h2 style="font-size: 2rem;color: #e76f51; padding-top: 5%; margin-left:10%">Score:0</h2>
+  
+    <center>
+        <h1 style="font-size: 5rem;
+        color: #e76f51;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+       ">Memory Game</h1>
+    </center>
+    <div id="container">
+        <div class="button-grid">
+            <!-- All 16 buttons (4x4 grid) -->
+           
+            
+        </div>
+    </div>
+    <div class="progress" role="progressbar" aria-label="Danger striped example" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="margin-top: 50px; margin-left: 15%; width: 70%;">
+        <div class="progress-bar progress-bar-striped bg-danger"></div>
+      </div>
+    
+<script>
+   var i =65;
+for (let x = 0; x <16; x++) {
+    let k = document.createElement('div');
+    k.className = 'flip-card';
+    
+    let p = document.createElement('div');
+    p.className = 'flip-card-inner';
+    p.id =String.fromCharCode(i);
+    p.isenable=true;
+    
+    let q = document.createElement('div');
+    q.className = 'flip-card-front';
+    
+    // Correct way to create and set the image
+    let img = document.createElement('img');
+    img.src = 'life-ring.png';
+    img.width = 60; // Set width to match your previous image width
+    q.appendChild(img); // Append image to the front card div
+    
+    let r = document.createElement('div');
+    r.className = 'flip-card-back';
+    r.id = x;
+
+    p.appendChild(q);
+    p.appendChild(r);
+    
+    k.appendChild(p);
+
+    // Correctly append the new card to the grid
+    document.getElementsByClassName('button-grid')[0].appendChild(k);
+    i++;
+}
+
+</script>
+    <script>
+        // let isenable=true;
+        // Add event listeners to flip the cards on click
+        const cards = document.querySelectorAll('.flip-card-inner');
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+           
+                    console.log(card.id);
+                    console.log(card.id);
+               
+                card.classList.toggle('flipped');
+            
+            
+            });
+        });
+
+    </script>
+    <script src="game.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
